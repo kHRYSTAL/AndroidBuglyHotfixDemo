@@ -1,0 +1,56 @@
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:2.2.0'
+
+        // tinker gradle插件
+        classpath ('com.tencent.tinker:tinker-patch-gradle-plugin:1.7.5')
+
+        // tinker support插件
+        classpath "com.tencent.bugly:tinker-support:latest.release"
+    }
+}
+
+allprojects {
+    repositories {
+        jcenter()
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+
+// wrapper版本
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.14.1'
+}
+
+ext {
+    // android 配置
+    minSdkVersion = 14
+    compileSdkVersion = 22
+    targetSdkVersion = 22
+    buildToolsVersion = '21.1.2'
+    supportV4 = 'com.android.support:support-v4:23.3.0'
+    supportV7 = 'com.android.support:recyclerview-v7:23.2.1'
+    desgin = 'com.android.support:design:22.2.1'
+
+    // 请求方式
+    retrofit = 'com.squareup.retrofit:retrofit:2.0.0-beta2'
+    converterGson = 'com.squareup.retrofit:converter-gson:2.0.0-beta2'
+    rxjava = 'com.squareup.retrofit:adapter-rxjava:2.0.0-beta2'
+    rxlifecycle = 'com.trello:rxlifecycle:0.6.1'
+
+    // 测试依赖
+    junit = 'junit:junit:4.12'
+    mockito = 'org.mockito:mockito-core:1.10.19'
+    robolectric = 'org.robolectric:robolectric:3.0'
+    hamcrest = 'org.hamcrest:hamcrest-all:1.3'
+
+    // 多dex
+    multiDex = 'com.android.support:multidex:1.0.0'
+}
