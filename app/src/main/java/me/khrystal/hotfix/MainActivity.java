@@ -20,7 +20,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button btnShowToast;
     private Button btnLoadPatch;
     private Button btnKillSelf;
-    private Button btnLoadLibrary;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,8 +33,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnKillSelf.setOnClickListener(this);
         btnLoadPatch = (Button) findViewById(R.id.btnLoadPatch);
         btnLoadPatch.setOnClickListener(this);
-        btnLoadLibrary = (Button) findViewById(R.id.btnLoadLibrary);
-        btnLoadLibrary.setOnClickListener(this);
 
         tvCurrentVersion.setText("当前版本:" + getCurrentVersion(this));
     }
@@ -70,9 +67,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btnLoadPatch: // 本地加载补丁测试
                 Beta.applyTinkerPatch(getApplicationContext(),
                         Environment.getExternalStorageDirectory().getAbsolutePath()+ "/patch_signed_7zip.apk");
-                break;
-            case R.id.btnLoadLibrary: // 本地加载so庫测试
-                Beta.loadArmLibrary(getApplicationContext(), "stlport_shared");
                 break;
         }
     }

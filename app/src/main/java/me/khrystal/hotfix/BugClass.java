@@ -13,7 +13,7 @@ public class BugClass {
     public String bug() {
         // 这段代码会报空指针
         String str = null;
-        int length = str.length();
+        //int length = str.length();
         return "This is a bug class";
     }
 }
