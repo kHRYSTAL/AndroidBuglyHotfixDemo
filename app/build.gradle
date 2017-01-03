@@ -134,14 +134,14 @@ ext {
 
     // 用于普通构建
     // 补丁包是基于该版本生成的补丁
-    tinkerOldApkPath = "${bakPath}/app-debug-0103-19-00-31.apk"
+    tinkerOldApkPath = "${bakPath}/app-debug-0103-19-08-06.apk"
     // 对应tinker插件applyMapping, 可选参数；在编译新的apk时候，我们希望通过保持旧apk的proguard混淆方式，
     // 从而减少补丁包的大小。这个只是推荐的，但设置applyMapping会影响任何的assemble编译。
     // 用于原始方法名类名的混淆规则
     tinkerApplyMappingPath = "${bakPath}/debug-0103-mapping.txt"
 
     // 用于补丁包资源文件的构建 如果有资源文件的源文件改动 必须在R.txt中指明
-    tinkerApplyResourcePath = "${bakPath}/app-debug-0103-19-00-31-R.txt"
+    tinkerApplyResourcePath = "${bakPath}/app-debug-0103-19-08-06-R.txt"
 
     // 多渠道下使用此属性 默认忽略
     tinkerBuildFlavorDirectory = "${bakPath}/app-0103-appFlavor"
