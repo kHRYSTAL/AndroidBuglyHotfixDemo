@@ -24,7 +24,7 @@ import com.tencent.tinker.loader.app.DefaultApplicationLike;
 
 public class SampleApplicationDelegate extends DefaultApplicationLike {
 
-    public static final String TAG = "Tinker.SampleApplicationLike";
+    public static final String TAG = SampleApplicationDelegate.class.getCanonicalName();
 
     public SampleApplicationDelegate(Application application,
                                      int tinkerFlags,
@@ -43,12 +43,10 @@ public class SampleApplicationDelegate extends DefaultApplicationLike {
     @Override
     public void onCreate() {
         super.onCreate();
-        // TODO : 这里进行bugly初始化
-        // 设置为开发设备
         Bugly.setIsDevelopmentDevice(getApplication(), true);
         // 这里实现SDK 初始化 appId替换成在Bugly 平台申请的appId
         // TODO: 17/1/3  need replace appId
-        Bugly.init(getApplication(), "900029763", true);
+        Bugly.init(getApplication(), "e7a2e43b67", true);
     }
 
     @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
