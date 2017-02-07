@@ -1,7 +1,10 @@
 package me.khrystal.hotfix;
 
-import com.tencent.tinker.loader.app.TinkerApplication;
-import com.tencent.tinker.loader.shareutil.ShareConstants;
+import android.app.Application;
+import android.content.Context;
+
+import com.tencent.bugly.Bugly;
+import com.tencent.bugly.beta.Beta;
 
 /**
  * usage:
@@ -11,17 +14,20 @@ import com.tencent.tinker.loader.shareutil.ShareConstants;
  * email: 723526676@qq.com
  */
 
-public class SampleApplication extends TinkerApplication {
+public class SampleApplication extends Application {
 
-    /**
-     * 参数1：int tinkerFlags 表示Tinker支持的类型 dex only、library only or all suuport，default: TINKER_ENABLE_ALL
-     * 参数2：String delegateClassName Application代理类 这里填写你自定义的ApplicationLike
-     * 参数3：String loaderClassName  Tinker的加载器，使用默认即可
-     * 参数4：boolean tinkerLoadVerifyFlag  加载dex或者lib是否验证md5，默认为false
-     */
-    public SampleApplication() {
-        super(ShareConstants.TINKER_ENABLE_ALL,
-                "me.khrystal.hotfix.SampleApplicationDelegate",
-                "com.tencent.tinker.loader.TinkerLoader", false);
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        // 这里实现SDK初始化，appId, 是否为debug模式(是否打印日志)
+        // TODO: 17/2/7 替换appId
+        Bugly.init(this, "9527lzsb", true);
+    }
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        // 安装tinker
+        Beta.installTinker();
     }
 }

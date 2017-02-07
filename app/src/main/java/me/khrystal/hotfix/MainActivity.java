@@ -3,10 +3,10 @@ package me.khrystal.hotfix;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.os.Bundle;
 import android.os.Environment;
 import android.os.Process;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -20,7 +20,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button btnShowToast;
     private Button btnLoadPatch;
     private Button btnKillSelf;
-//    private Button btnLoadLibrary;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,8 +33,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnKillSelf.setOnClickListener(this);
         btnLoadPatch = (Button) findViewById(R.id.btnLoadPatch);
         btnLoadPatch.setOnClickListener(this);
-//        btnLoadLibrary = (Button) findViewById(R.id.btnLoadLibrary);
-//        btnLoadLibrary.setOnClickListener(this);
 
         tvCurrentVersion.setText("当前版本:" + getCurrentVersion(this));
     }
@@ -65,15 +62,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 testShowToast();
                 break;
             case R.id.btnKillSelf: // 杀死进程
-                android.os.Process.killProcess(android.os.Process.myPid());
+                Process.killProcess(Process.myPid());
                 break;
             case R.id.btnLoadPatch: // 本地加载补丁测试
                 Beta.applyTinkerPatch(getApplicationContext(),
-                        Environment.getExternalStorageDirectory().getAbsolutePath()+ "/patch_unsigned.apk");
+                        Environment.getExternalStorageDirectory().getAbsolutePath()+ "/patch_signed_7zip.apk");
                 break;
-//            case R.id.btnLoadLibrary: // 本地加载so庫测试
-//                Beta.loadArmLibrary(getApplicationContext(), "stlport_shared");
-//                break;
         }
     }
 }

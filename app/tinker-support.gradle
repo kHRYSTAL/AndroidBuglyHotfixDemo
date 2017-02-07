@@ -1,0 +1,47 @@
+apply plugin: 'com.tencent.bugly.tinker-support'
+// 基线包 mapping文件 R.txt文件生成目录
+def bakPath = file("${buildDir}/bakApk/")
+// 基线apk包名称(针对补丁包)
+// TODO 注意保存基线包 jekins需要保存 日期需要正则配置
+def appName = "app-0207-17-32-21"
+
+/**
+ * 对于插件各参数的详细解析请参考
+ * {@see https://bugly.qq.com/docs/user-guide/instruction-manual-android-hotfix/?v=20170205190410#tinker-support}
+ *
+ */
+tinkerSupport {
+
+    // 开启tinker-support插件，默认值true
+    enable = true
+
+    // 指定归档目录，默认值当前module的子目录tinker
+    autoBackupApkDir = "${bakPath}"
+
+    // 是否启用覆盖tinkerPatch配置功能，默认值false
+    // tinkerPatch 为 2017年1月11日前的配置参数 项目中已经删除该参数
+    // 开启后tinkerPatch配置不生效，即无需添加tinkerPatch
+    overrideTinkerPatchConfiguration = true
+
+    // 编译补丁包时，必需指定基线版本的apk，默认值为空
+    // 如果该变量为空，则表示不是进行补丁包的编译
+    // TODO 注意 一定要在android studio或服务器中保留基线版本
+    // @{link tinkerPatch.oldApk }
+    baseApk =  "${bakPath}/${appName}/app-release.apk"
+
+    // 对应tinker插件applyMapping
+    baseApkProguardMapping = "${bakPath}/${appName}/app-release-mapping.txt"
+
+    // 对应tinker插件applyResourceMapping
+    baseApkResourceMapping = "${bakPath}/${appName}/app-release-R.txt"
+
+    // 唯一标识当前版本
+    // 这里强调一下，基线版本配置一个唯一的tinkerId，
+    // 而这个基线版本能够应用补丁的前提是集成过热更新SDK，
+    // 并启动上报过联网，这样我们后台会将这个tinkerId对应到一个目标版本，
+    // 例如tinkerId = "bug_1.0.0" 对应了一个目标版本是1.0.0，基于这个版本打的补丁包就能匹配到目标版本。
+    tinkerId = "base_1.0.0"
+
+    // 是否开启代理Application，设置之后无须改造Application，默认为false
+    enableProxyApplication = true
+}

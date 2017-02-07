@@ -15,3 +15,10 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
+
+
+# tinker混淆配置 start #
+-keep class android.support.**{*;}
+-dontwarn com.tencent.bugly.**
+-keep public class com.tencent.bugly.**{*;}
+
